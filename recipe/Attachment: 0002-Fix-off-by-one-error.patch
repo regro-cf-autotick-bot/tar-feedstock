@@ -1,0 +1,26 @@
+>From a6742d2ca54336f9b3c869c357c813afd0fb9c85 Mon Sep 17 00:00:00 2001
+From: Collin Funk <collin.funk1@gmail.com>
+Date: Sat, 21 Sep 2024 22:42:42 -0700
+Subject: [PATCH 2/2] Fix off-by-one error.
+
+* src/common.h (TIMESPEC_STRSIZE_BOUND): Account for NUL.
+---
+ src/common.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/common.h b/src/common.h
+index df87478c..c5df79f6 100644
+--- a/src/common.h
++++ b/src/common.h
+@@ -699,7 +699,7 @@ char *timetostr (time_t, char buf[SYSINT_BUFSIZE]);
+ void code_ns_fraction (int ns, char *p);
+ enum { BILLION = 1000000000, LOG10_BILLION = 9 };
+ enum { TIMESPEC_STRSIZE_BOUND =
+-         SYSINT_BUFSIZE + LOG10_BILLION + sizeof "." - 1 };
++         SYSINT_BUFSIZE + LOG10_BILLION + sizeof "." };
+ char const *code_timespec (struct timespec ts,
+ 			   char tsbuf[TIMESPEC_STRSIZE_BOUND]);
+ struct timespec decode_timespec (char const *, char **, bool);
+-- 
+2.47.0
+
