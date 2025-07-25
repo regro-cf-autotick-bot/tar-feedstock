@@ -21,8 +21,10 @@ requirements:
     - make
     - pkg-config
     - gnuconfig
+    - gettext-tools
   host:
     - libiconv
+    - libintl-devel  # [osx]
 test:
   commands:
     - tar --version | grep {{ version }}
